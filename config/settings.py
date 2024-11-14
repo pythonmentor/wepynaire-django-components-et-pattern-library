@@ -43,11 +43,6 @@ INSTALLED_APPS = [
     # Pour utiliser django-components et django-pattern-library
     "django_components",
     "pattern_library",
-    # Pour utiliser django-vite
-    "django_vite",
-    # Pour recharger automatiquement le navigateur lors de la
-    # modification des fichiers
-    "django_browser_reload",
     # Usage de la configuration avancée de django-template-partials pour être
     # compatible avec django-components
     "template_partials.apps.SimpleAppConfig",
@@ -66,9 +61,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # Pour recharger automatiquement le navigateur lors de la modification des
-    # fichiers
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -200,13 +192,6 @@ STORAGES = {
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
-}
-
-# Ce réglage configure django-vite pour servir les fichiers statiques.
-DJANGO_VITE = {
-    "default": {
-        "dev_mode": DEBUG,
-    }
 }
 
 # Liste des moteurs de découverte sachant retrouver les fichiers statiques
