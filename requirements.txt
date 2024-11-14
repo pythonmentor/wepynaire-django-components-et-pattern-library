@@ -1,0 +1,8 @@
+django<5.1
+django-extensions
+django-vite
+django-browser-reload
+django-template-partials
+django-components
+django-pattern-library
+crispy-tailwind

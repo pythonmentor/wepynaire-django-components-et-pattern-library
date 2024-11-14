@@ -1,0 +1,16 @@
+context:
+  title: PlacePython
+  menu_items:
+    - text: Accueil
+      href: '#'
+      active_class: active
+    - text: Articles
+      href: '#'
+    - text: Où commencer ?
+      href: '#'
+    - text: A propos
+      href: '#'
+    - text: Contact
+      href: '#'
+  login_url: "#"
+  logout_url: "#"

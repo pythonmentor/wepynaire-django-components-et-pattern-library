@@ -1,0 +1,71 @@
+<header x-data="{ open: false }" class="absolute inset-x-0 top-0 z-50">
+	<nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+		<div class="flex lg:flex-1">
+			<a href="#" class="-m-1.5 p-1.5 flex space-x-2 items-center text-xl">
+				<span class="sr-only">{{ title }}</span>
+				{% slot "logo" default %}{% endslot %} 
+				{% slot "brand" %}{{ title }}{% endslot %}
+			</a>
+		</div>
+		<div class="flex lg:hidden">
+			<button @click="open = !open" type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5">
+				<span class="sr-only">Open main menu</span>
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-slot="icon">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16m-7 6h7"></path>
+				</svg>
+			</button>
+		</div>
+		<div class="hidden lg:flex lg:gap-x-8 items-center">
+			{% for item in menu_items %}
+				<a href="{{ item.href }}" class="{% if item.active_class == 'active' %}{{ active_class }} {% else %}{% endif %}font-semibold hover:text-primary">{{ item.text }}</a>
+			{% endfor %}
+		</div>
+		{% if login_url and logout_url %}
+		<div class="hidden lg:flex lg:flex-1 lg:justify-end">
+			{% if user.is_authenticated %}
+				<a href="{{ login_url }}" class="font-semibold hover:text-primary">Déconnexion <span aria-hidden="true">&rarr;</span></a>
+			{% else %}
+				<a href="{{ login_url }}" class="font-semibold hover:text-primary">Connexion <span aria-hidden="true">&rarr;</span></a>
+			{% endif %}
+		</div>
+		{% endif %}
+	</nav>
+	<!-- Mobile menu, show/hide based on menu open state. -->
+	<div :class="{ 'hidden': !open }" class="lg:hidden" role="dialog" aria-modal="true">
+		<!-- Background backdrop, show/hide based on slide-over state. -->
+		<div class="fixed inset-0 z-50"></div>
+		<div  class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto px-6 py-6 bg-white text-black dark:bg-black dark:text-white sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:ring-white/10">
+			<div class="flex items-center justify-between">
+				<a href="#" class="-m-1.5 p-1.5">
+					<span class="sr-only">{{ title }}</span>
+					{% slot "logo_mobile" %}{% endslot %}
+				</a>
+				<button @click="open = !open" type="button" class="-m-2.5 rounded-md p-2.5">
+					<span class="sr-only">Close menu</span>
+					<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+					</svg>
+				</button>
+			</div>
+			<div class="mt-6 flow-root">
+				<div class="-my-6 divide-y divide-gray-500/10">
+					<div class="space-y-2 py-6">
+						{% for item in menu_items %}
+							<a href="{{ item.href }}" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50 hover:text-primary">{{ item.text }}</a>
+						{% endfor %}
+					</div>
+					{% if login_url and logout_url %}
+						<div class="py-6">
+							{% if user.is_authenticated %}
+								<a href="{{ logout_url }}" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-gray-50 hover:text-primary">Déconnexion</a>
+							{% else %}
+								<a href="{{ login_url }}" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-gray-50 hover:text-primary">Connexion</a>
+							{% endif %}
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
